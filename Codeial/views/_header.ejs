@@ -5,7 +5,7 @@
                <% if(locals.user) { %>
                 <div class="div-home">
                 <li class="litag">
-                    <b> <a href="/users/profile">
+                    <b> <a href="/users/profile/<%= locals.user.id %>">
                         <%= user.name %>
                     </a></b>&nbsp;&nbsp;&nbsp;&nbsp;
                 </li> 

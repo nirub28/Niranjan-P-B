@@ -1,5 +1,18 @@
   <link rel="stylesheet" href="/css/user_profile.css">
    <h1>Codeial / Profile Page</h1>
 
-   <p><b>Name  :</b> <%= profile_user.name %> </p>
-   <p><b>Email :</b> <%= profile_user.email %> </p>
+
+   <% if(user.id == profile_user.id) {%>
+     <!-- if logged in user and requested user is same them allow to edit profile-->
+    <form action="/users/update/<%= profile_user.id %>" method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="submit" value="Update">
+    </form>
+
+   <%} else {%>
+    <p><b>Name  :</b> <%= profile_user.name %> </p>
+    <p><b>Email :</b> <%= profile_user.email %> </p>
+
+   <%}%>
+   
