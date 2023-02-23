@@ -1,0 +1,8 @@
+div {
+  display: block; }
+  div a {
+    text-decoration: none;
+    color: white; }
+  div a:hover {
+    color: #070707;
+    text-decoration: underline; }

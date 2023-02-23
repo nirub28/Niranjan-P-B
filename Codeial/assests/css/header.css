@@ -1,0 +1,12 @@
+.div-home {
+  display: flex;
+  justify-content: space-between; }
+
+.litag {
+  list-style-type: none; }
+  .litag a {
+    text-decoration: none;
+    color: white; }
+  .litag a:hover {
+    color: black;
+    text-decoration: underline; }

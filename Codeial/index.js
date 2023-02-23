@@ -1,0 +1,88 @@
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const app = express();
+const port = 8000;
+const expresslayouts = require('express-ejs-layouts');
+const db = require('./config/mongoose');
+
+//create session
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const  MongoStore = require('connect-mongo');
+
+const sassMiddleware = require ('node-sass-middleware');
+
+app.use(sassMiddleware({
+   src:'./assests/scss',
+   dest:'./assests/css',
+   debug:true,
+   outputStyle:'exended',
+   prefix:'/css'
+}));
+
+app.use(express.urlencoded());
+
+app.use(cookieParser());
+
+app.use(express.static('assests'));
+
+app.use(expresslayouts);
+
+//extract static files of each page
+app.set('layout extractStyles' , true);
+app.set('layout extractScripts' , true);
+
+
+
+//use ejs view engine
+app.set('view engine','ejs') ;
+app.set('views','./views');
+
+
+//creating a session
+app.use(session({
+   name:'Codeial',
+   secret:'blahsomething',
+   saveUninitialized:false,
+   resave:false,
+   cookie:{
+      maxAge:(1000*60*100)
+   },
+   //  store : new MongoStore(
+   //    {
+   //       mongooseonnection : db,
+   //       autoRemove : 'disabled'
+   //    },
+   //    function(err){
+   //       console.log(err ||  'connect-mongodb setup is okay');
+   //    }
+   // )
+   //store: MongoStore.create({
+      //options)
+     store : new MongoStore({
+      mongoUrl : "mongodb://127.0.0.1:27017/codeial_development",
+      autoremove : "disabled",
+  },function(err){
+      console.log("error at mongo store",err || "connection established to store cookie");
+  })
+
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.SetAuthenticatedUser);
+
+
+//use router
+app.use('/', require('./routes'));
+
+app.listen(port, function(err){
+     if(err){
+        console.log(`Error ${err}`);
+        return;
+     }
+
+     console.log(`Server is up and running on port: ${port}`);
+});
