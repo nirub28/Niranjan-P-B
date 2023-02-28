@@ -2,17 +2,32 @@ const Post = require('../models/Post');
 //as we need to delete comments associated with with post, we import it
 const Comment = require('../models/Comment');
 
-module.exports.create = function (req, res) {
-  Post.create({
+module.exports.create = async function (req, res) {
+ try{
+  let post = await Post.create({
     content: req.body.content,
     user: req.user._id
-  }, function (err, post) {
-    if (err) { console.log("Error is storing post"); return; }
+  });
+
+
+  //checking if data sent is oin json xhr format
+    if(req.xhr){
+      return res.status(200).json({
+        data:{
+          post:post
+        },
+        message:'Post created'
+      });
+    }
+
     req.flash('success', 'Post Created');
     return res.redirect('back');
-  });
+ 
+}catch(err){
+  req.flash('error', err);
+  return res.redirect('back');
 }
-
+}
 module.exports.destroy = async function (req, res) {
   //.id means converting object id to string
 
@@ -24,6 +39,14 @@ module.exports.destroy = async function (req, res) {
     post.remove();
 
     await Comment.deleteMany({ post: req.params.id });//finding the post id and deleteting commets of it
+    if(req.xhr){
+      return res.status(200).json({
+        data:{
+          post_id:req.params.id
+        },
+        message:"Post Delete"
+      });
+    }
     req.flash('success', 'Post and Associated comments Deleted!');
     return res.redirect('back');
   }
