@@ -8,7 +8,7 @@ module.exports.create = function (req, res) {
     user: req.user._id
   }, function (err, post) {
     if (err) { console.log("Error is storing post"); return; }
-
+    req.flash('success', 'Post Created');
     return res.redirect('back');
   });
 }
@@ -24,14 +24,16 @@ module.exports.destroy = async function (req, res) {
     post.remove();
 
     await Comment.deleteMany({ post: req.params.id });//finding the post id and deleteting commets of it
+    req.flash('success', 'Post and Associated comments Deleted!');
     return res.redirect('back');
   }
   else {
+    req.flash('success', 'You cant delete post');
     return res.redirect('back');
   }
 
   }catch(err){
-    console.log('Error', err);
+    req.flash('error', err);
     return;
   }
   

@@ -67,15 +67,18 @@ module.exports.create=function(req,res){
 
 //get sign in data
 module.exports.createSession=function(req,res){
+
+   req.flash('success', 'Logged in Successfully');
      return res.redirect('/');
 }
 
 module.exports.destroySession=function(req,res){
 //logout before reirecing this fuc given by passport
+   
      req.logout(function(err){
       if(err){
          console.log('Unable to perform logout');
       }
-     });
+     });req.flash('success', 'You have logged Out');
    return res.redirect('/');
 }

@@ -13,6 +13,8 @@ module.exports.create= function(req,res){
 
             post.comments.push(comment);
             post.save();
+            req.flash('success' ,'Comment got Added');
+
             res.redirect('/');
         });
     }
@@ -25,6 +27,7 @@ module.exports.destroy=function(req,res){
             let postID=comment.post; // we need post for which under it we deleted comment above so in posts array we have to remove the comment
             comment.remove();
             post.findByIdAndUpdate(postID, { $pull:{comment:req.params.id}},function(err,post){ //$pull is giving by node to fetch and remove 
+                req.flash('success' ,'Comment got Deleted');
                 return res.redirect('back');
             })
         }else{

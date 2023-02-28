@@ -12,6 +12,8 @@ const passportLocal = require('./config/passport-local-strategy');
 const  MongoStore = require('connect-mongo');
 
 const sassMiddleware = require ('node-sass-middleware');
+const flash = require('connect-flash');
+const customMware= require('./config/middleware');
 
 app.use(sassMiddleware({
    src:'./assests/scss',
@@ -49,17 +51,7 @@ app.use(session({
    cookie:{
       maxAge:(1000*60*100)
    },
-   //  store : new MongoStore(
-   //    {
-   //       mongooseonnection : db,
-   //       autoRemove : 'disabled'
-   //    },
-   //    function(err){
-   //       console.log(err ||  'connect-mongodb setup is okay');
-   //    }
-   // )
-   //store: MongoStore.create({
-      //options)
+
      store : new MongoStore({
       mongoUrl : "mongodb://127.0.0.1:27017/codeial_development",
       autoremove : "disabled",
@@ -74,6 +66,8 @@ app.use(passport.session());
 
 app.use(passport.SetAuthenticatedUser);
 
+app.use(flash());
+app.use(customMware.setFlash);
 
 //use router
 app.use('/', require('./routes'));
