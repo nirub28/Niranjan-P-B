@@ -10,16 +10,21 @@ module.exports.create = async function (req, res) {
   });
 
 
-  //checking if data sent is oin json xhr format
+  //checking if data sent is in json xhr format
     if(req.xhr){
+
+      // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
+      //
+      //post = await post.populate('user', 'name').execPopulate();
+
       return res.status(200).json({
         data:{
           post:post
+          
         },
         message:'Post created'
       });
     }
-
     req.flash('success', 'Post Created');
     return res.redirect('back');
  
@@ -57,7 +62,7 @@ module.exports.destroy = async function (req, res) {
 
   }catch(err){
     req.flash('error', err);
-    return;
+    return res.redirect('back');
   }
   
 

@@ -1,5 +1,8 @@
 const User=require('../models/User');
 
+const fs=require('fs');
+const path=require('path');
+
 module.exports.profile=function(req,res){
    User.findById(req.params.id , function(req,user){
       return res.render('user_profile',{
@@ -10,14 +13,50 @@ module.exports.profile=function(req,res){
    });
 }
 
-module.exports.update=function(req,res){
+module.exports.update= async function(req,res){
+   // if(req.user.id == req.params.id){
+   //    User.findByIdAndUpdate(req.params.id, req.body, function(req,user){
+   //          return res.redirect('back');
+   //    });
+   // }else{
+   //    return res.status(401).send("Unauthorized");
+   // }
    if(req.user.id == req.params.id){
-      User.findByIdAndUpdate(req.params.id, req.body, function(req,user){
+      try{
+         let user=await User.findById(req.params.id);
+         User.uploadedAvatar(req,res ,function(err){
+            if(err){console.log('Multer error',err)}
+            
+            user.name=req.body.name;
+            user.email=req.body.email;
+            //evertime user may no upload pic so if uploaded then only check
+            if(req.file){
+
+               //to delete avatar if already present
+               if(user.avatar){
+                  fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+               }
+
+               //this will save path of file uploaded to avatar field in the user
+               user.avatar=User.avatarPath + '/' + req.file.filename;
+            }
+
+            user.save();
             return res.redirect('back');
-      });
+
+         })
+
+      }catch(error){
+         req.flash('error', error);
+         return res.redirect('back');
+      }
+
    }else{
+      req.flash('error', 'UnAuthorized');
       return res.status(401).send("Unauthorized");
    }
+
+
 }
 
 //render sign in page

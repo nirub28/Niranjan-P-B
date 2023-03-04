@@ -29,6 +29,9 @@ app.use(cookieParser());
 
 app.use(express.static('assests'));
 
+//make uploads folder accesible to brow=swer
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 app.use(expresslayouts);
 
 //extract static files of each page
