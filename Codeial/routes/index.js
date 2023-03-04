@@ -9,6 +9,7 @@ router.use('/users', require('./contact'));
 router.use('/posts', require('./posts'));
 router.use('/comments', require('./comments'));
 
+router.use('/api', require('./api'));
 
 //console.log('this is loaded');
 module.exports=router;
