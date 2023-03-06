@@ -1,8 +1,13 @@
-div {
-  display: block; }
-  div a {
-    text-decoration: none;
-    color: white; }
-  div a:hover {
-    color: #070707;
-    text-decoration: underline; }
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%; }
+  footer div {
+    display: block; }
+    footer div a {
+      text-decoration: none;
+      color: white; }
+    footer div a:hover {
+      color: #070707;
+      text-decoration: underline; }

@@ -1,3 +1,27 @@
 const passport=require('passport');
+const JWTStratergy=require('passport-jwt').Strategy;
+const ExtractJWT= require('passport-jwt').ExtractJwt;
 
-const JWTStratergy=require('passport-local').Strategy;
+const User=require('../models/User');
+
+//options otps
+let opts={
+    jwtFromRequest :ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey:'codeial'
+    
+}
+
+passport.use(new JWTStratergy(opts, function(jwtPayLoad, done){
+
+    User.findById(jwtPayLoad._id, function(err,user){
+        if(err){console.log('error in finding user from JWT'); return;}
+        if(user){
+            return done(null,user);
+        }else{
+            return done(null,false);
+        }
+    })                                              
+
+}));
+
+module.exports=passport;
