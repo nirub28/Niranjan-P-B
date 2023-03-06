@@ -14,11 +14,13 @@
             <%}%>
                         <div id="posts-list-container">
                               <ul>
-                                    <% for(post of posts) {%>
+                                    <li>
+                                       <% for(post of posts) {%>
       
                                          <%- include('_post') -%>
                                           
-                                  <% }%>
+                                       <% }%>
+                                  </li>
                               </ul>
                         </div>
       
