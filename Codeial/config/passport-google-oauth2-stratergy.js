@@ -13,7 +13,7 @@ passport.use(new googleStratergy({
     //find user
     User.findOne({email: profile.emails[0].value }).exec(function(err, user) {
         if(err){console.log('error in google stratergy passport',err);return;}
-         //user profile if active ggl acc or not - console.log(profile);
+         //user profile if active ggl acc or not -console.log(profile);
         if(user){
            // if user found  return
             return done(null,user);
