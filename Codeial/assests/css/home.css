@@ -1,14 +1,23 @@
 #home-container {
-  display: flex; }
+  display: flex;
+  /* change*/
+  /* change*/ }
   #home-container #feed-posts {
     width: 70%;
     padding: 10px; }
+  #home-container #user-all {
+    width: 30px;
+    padding: 10px;
+    border-left: 1px solid gray; }
+    #home-container #user-all a {
+      color: #22b9be; }
   #home-container #user-friends {
     width: 30px;
     padding: 10px;
     border-left: 1px solid gray; }
-  #home-container a {
-    color: green; }
 
 #delete-atag {
   color: red; }
+
+.toggle-like-buttton {
+  color: #44b832; }

@@ -20,6 +20,9 @@ router.post('/create-session', passport.authenticate(
 
 router.get('/sign-out', userController.destroySession);
 
+//change
+router.use('/friends', require('./friends'));
+
 
 //as profile don't have email field we need fetch separatly
 router.get('/auth/google', passport.authenticate('google', {scope :['profile', 'email']}));

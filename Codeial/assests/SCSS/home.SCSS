@@ -5,17 +5,31 @@
       width: 70%;
       padding: 10px;
    }
+   #user-all{
+      width:30px;
+      padding: 10px;
+      border-left: 1px solid gray;
+
+      a{
+         color: rgb(34, 185, 190);
+      }
+     }
+     
+
+   /* change*/
    #user-friends{
       width:30px;
       padding: 10px;
       border-left: 1px solid gray;
      }
-     a{
-      color: green;
-   }
+   /* change*/
+     
 }
 
 #delete-atag{
     
    color: red;
+}
+.toggle-like-buttton{
+   color:rgb(68, 184, 50)
 }

@@ -25,9 +25,34 @@
                         </div>
       
       </section>
+
+      <!--Change start-->
+      <div id="users-friends"> 
+
+            <% if(locals.user){%>
       
       <section id="user-friends">
-              <h4>Friends</h4>
+            <h4>Friends</h4>
+
+            <%for(u of all_friends) {%>
+                <p>
+                  <!-- <a href="/users/profile/<%= u.id %>"></a>-->
+                  <% if(locals.user.id == u.from_user) {%>
+                        <a href="/users/profile/<%= u.to_user %>">
+                        <%= u.name_touser %>
+                        </a> <span> <a href="/users/friends/remove-friend/<%= u.id %>">X</a></span> 
+                  <% } %>  
+                 </p>
+             <% }%>
+            
+    
+          </section>
+
+     <%}%>
+      <!--Change end-->
+
+      <section id="user-all">
+              <h4>Users</h4>
               <%for(u of all_users) {%>
                   <p>
                         <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
@@ -36,6 +61,7 @@
       
       
       </section>
+   </div>
 
 </div>
 <!-- importing this script for creating the comments -->

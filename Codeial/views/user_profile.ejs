@@ -16,5 +16,12 @@
     <p><b>Name  :</b> <%= profile_user.name %> </p>
     <p><b>Email :</b> <%= profile_user.email %> </p>
 
+    <!-- change - if not logged in user when go to profile add button to make frined-->
+     <form action="/users/friends/add-friend/<%= profile_user.id %>/<%= profile_user.name%>" method="post">
+      
+      <input type="Submit" value="Add Friend">
+     </form>
+     <!-- change end-->
+
    <%}%>
    
