@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 //as we need to delete comments associated with with post, we import it
 const Comment = require('../models/Comment');
+const Like = require('../models/Like');
 
 module.exports.create = async function (req, res) {
  try{
@@ -41,6 +42,12 @@ module.exports.destroy = async function (req, res) {
     let post = await Post.findById(req.params.id);
 
   if (post.user == req.user.id) { //to check if logged in user and post user is same
+
+
+    // deleting likes of post and its associated comments
+    await Like.deleteMany({likeable: post, onModel:'Post'});
+    await Like.deleteMany({_id:{$in: post.comments}});
+
     post.remove();
 
     await Comment.deleteMany({ post: req.params.id });//finding the post id and deleteting commets of it

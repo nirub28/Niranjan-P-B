@@ -2,7 +2,9 @@ const Comment=require('../models/Comment');
 const Post=require('../models/Post');
 const commentMailer=require('../mailers/comment_mailer');
 const queue=require('../config/kue');
-const commentEmailWorker=require('../workers/comment_email_worker')
+const commentEmailWorker=require('../workers/comment_email_worker');
+const Like = require('../models/Like');
+
 
 
 
@@ -101,6 +103,10 @@ module.exports.destroy = async function(req, res){
             comment.remove();
 
             let post = Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+
+
+             // deleting likes of comment 
+            await Like.deleteMany({likeable:comment, onModel:'Comment'});
 
             // send the comment id which was deleted back to the views
             if (req.xhr){

@@ -7,15 +7,20 @@ module.exports.home= async function(req,res){
    try{
 
       let posts = await Post.find({})
-      .sort(`-CreatedAt`)
-   .populate('user')
+      .sort(`-CreatedAt`)     //sort acc to time of create
+   .populate('user')         //extract user of post
    .populate({
-      path:'comments',
+      path:'comments',      // extract comment of post
       populate:{
-         path:'user'
+         path:'user'       //extract user of comment
+      },
+      populate:{
+         path:'likes'     //extract like of comment
       }
-   });   
-    let users=await User.find({});
+   }).populate('comments')
+   .populate('likes');   //extract like of post
+    
+   let users=await User.find({});
         
     return res.render('home',{
       title:"Codeial | Home",

@@ -41,3 +41,14 @@
 <!-- importing this script for creating the comments -->
 <script src="/js/home_post_comments.js" ></script>
 <script src="/js/home_posts.js"></script>
+
+<!--lets import toggle class and iterate it over already present posts and comments-->
+
+<script src="/js/toggle_likes.js"></script>
+<script>
+      $('.toggle-like-button').each(function(){
+            let self=this;
+            let toggleLike=new toggleLike(self);
+      });
+
+</script>
