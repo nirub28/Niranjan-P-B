@@ -1,5 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+
+const dotEnv = require('dotenv');
+dotEnv.config();
+
+const env=require('./config/enivironment');
 const app = express();
 const port = 8000;
 const expresslayouts = require('express-ejs-layouts');
@@ -24,11 +29,11 @@ chatServer.listen(5000);
 console.log('Chat server is running on port 5000');
 
 
-
+const path=require('path');
 
 app.use(sassMiddleware({
-   src:'./assests/scss',
-   dest:'./assests/css',
+   src:path.join(__dirname, env.asset_path,'SCSS'),
+   dest:path.join(__dirname, env.asset_path,'CSS'),
    debug:true,
    outputStyle:'exended',
    prefix:'/css'
@@ -38,7 +43,7 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-app.use(express.static('assests'));
+app.use(express.static(env.asset_path));
 
 //make uploads folder accesible to brow=swer
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -59,7 +64,7 @@ app.set('views','./views');
 //creating a session
 app.use(session({
    name:'Codeial',
-   secret:'blahsomething',
+   secret:env.session_cookie_key,
    saveUninitialized:false,
    resave:false,
    cookie:{
