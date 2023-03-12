@@ -1,9 +1,12 @@
 footer{
+    height: 50px;
+    background: grey;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
   
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   div{
    
     display: block;
@@ -18,3 +21,4 @@ footer{
 
 }
 }
+

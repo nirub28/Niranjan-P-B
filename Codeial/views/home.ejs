@@ -63,6 +63,11 @@
       </section>
    </div>
 
+
+   <%- include('_chat_box') -%>
+
+   
+
 </div>
 <!-- importing this script for creating the comments -->
 <script src="/js/home_post_comments.js" ></script>
@@ -78,3 +83,14 @@
       });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+
+<% if (locals.user) {%> 
+
+      <script>
+            new ChatEngine('user-chat-box','<%= locals.user.email %>'); //user chat box is id given to chat box in chat.ejs file
+      </script>
+      
+      
+      <%}%>

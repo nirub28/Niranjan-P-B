@@ -1,21 +1,6 @@
 body {
   margin: 0;
   /* text-align: center; */ }
-
-#layout-main {
-  height: 100%; }
-
-footer {
-  background-color: gray;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-header {
-  background-color: #28379d;
-  color: white;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
+  body #layout-main {
+    height: 100%;
+    overflow: auto; }

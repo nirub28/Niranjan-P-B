@@ -1,9 +1,13 @@
+html {
+  height: 100%; }
+
 #home-container {
+  min-height: 100%;
   display: flex;
   /* change*/
   /* change*/ }
   #home-container #feed-posts {
-    width: 70%;
+    width: 50%;
     padding: 10px; }
   #home-container #user-all {
     width: 30px;
@@ -12,7 +16,7 @@
     #home-container #user-all a {
       color: #22b9be; }
   #home-container #user-friends {
-    width: 30px;
+    width: 50px;
     padding: 10px;
     border-left: 1px solid gray; }
 

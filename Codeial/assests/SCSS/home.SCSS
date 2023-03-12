@@ -1,8 +1,12 @@
+html{
+   height: 100%;
+}
 #home-container{
+   min-height: 100%;
    display: flex;
 
    #feed-posts{
-      width: 70%;
+      width: 50%;
       padding: 10px;
    }
    #user-all{
@@ -18,7 +22,7 @@
 
    /* change*/
    #user-friends{
-      width:30px;
+      width:50px;
       padding: 10px;
       border-left: 1px solid gray;
      }
@@ -33,3 +37,4 @@
 .toggle-like-buttton{
    color:rgb(68, 184, 50)
 }
+

@@ -2,25 +2,12 @@ body{
     margin: 0;
     /* text-align: center; */
 
-}
+
 #layout-main{
     height:100%;
+    overflow: auto;
+}
 }
 
-footer{
-    background-color: gray;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-header{
-    background-color: rgb(40, 55, 157);
-    color: white;
-    height:50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-   
-}
+
 

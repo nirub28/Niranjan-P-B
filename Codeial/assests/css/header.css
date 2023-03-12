@@ -10,3 +10,11 @@
   .litag a:hover {
     color: black;
     text-decoration: underline; }
+
+header {
+  background-color: #28379d;
+  color: white;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
