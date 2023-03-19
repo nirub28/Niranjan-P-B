@@ -1,7 +1,7 @@
 const passport=require('passport');
 const googleStratergy=require('passport-google-oauth').OAuth2Strategy;
 const crypto=require('crypto');
-const env =require('./enivironment');
+const env =require('./environment');
 
 
 const User=require('../models/User');

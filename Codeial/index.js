@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser');
 const dotEnv = require('dotenv');
 dotEnv.config();
 
-const env=require('./config/enivironment');
+const env=require('./config/environment');
+const logger=require('morgan');
+
 const app = express();
 const port = 8000;
 const expresslayouts = require('express-ejs-layouts');
@@ -31,14 +33,16 @@ console.log('Chat server is running on port 5000');
 
 const path=require('path');
 
-app.use(sassMiddleware({
+if(env.name =='devlopment'){
+
+   app.use(sassMiddleware({
    src:path.join(__dirname, env.asset_path,'SCSS'),
    dest:path.join(__dirname, env.asset_path,'CSS'),
    debug:true,
    outputStyle:'exended',
    prefix:'/css'
-}));
-
+    }));
+}
 app.use(express.urlencoded());
 
 app.use(cookieParser());
@@ -47,6 +51,8 @@ app.use(express.static(env.asset_path));
 
 //make uploads folder accesible to brow=swer
 app.use('/uploads', express.static(__dirname + '/uploads'));
+
+app.use(logger(env.morgan.mode, env.morgan.options)); // using logs
 
 app.use(expresslayouts);
 

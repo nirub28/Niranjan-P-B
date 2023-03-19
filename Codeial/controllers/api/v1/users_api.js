@@ -1,6 +1,6 @@
 const User=require('../../../models/User');
 const jwt=require('jsonwebtoken');
-const env=require('../../../config/enivironment');
+const env=require('../../../config/environment');
 
 module.exports.createSession=async function(req,res){
 try{

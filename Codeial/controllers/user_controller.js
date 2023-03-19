@@ -83,6 +83,7 @@ module.exports.signUp=function(req,res){
 //get sign up data
 module.exports.create=function(req,res){
    if(req.body.password != req.body.confirm_password){
+      req.flash('error', 'Mismatch pass');
       return res.redirect('back');
    }
       
@@ -92,7 +93,7 @@ module.exports.create=function(req,res){
       if(!user){
          User.create(req.body, function(err,user){
             if(err){console.log("error in creating user");return}
-
+            req.flash('success', 'New User created');
             return res.redirect('/users/sign-in');
          })
       }else{
