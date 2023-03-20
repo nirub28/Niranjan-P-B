@@ -7,10 +7,17 @@ dotEnv.config();
 const env=require('./config/environment');
 const logger=require('morgan');
 
+
+
+
 const app = express();
 const port = 8000;
 const expresslayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+
+//for chat related cors error
+const cors = require('cors');
+app.use(cors());
 
 //create session
 const session = require('express-session');
