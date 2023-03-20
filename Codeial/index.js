@@ -34,7 +34,6 @@ console.log('Chat server is running on port 5000');
 const path=require('path');
 
 if(env.name =='devlopment'){
-
    app.use(sassMiddleware({
    src:path.join(__dirname, env.asset_path,'SCSS'),
    dest:path.join(__dirname, env.asset_path,'CSS'),
@@ -42,7 +41,8 @@ if(env.name =='devlopment'){
    outputStyle:'exended',
    prefix:'/css'
     }));
-}
+ }
+
 app.use(express.urlencoded());
 
 app.use(cookieParser());
